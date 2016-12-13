@@ -1,0 +1,27 @@
+<md-dialog aria-label="Share your calendar"> 
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Share your calendar</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon class="mdi mdi-close" aria-label="Close dialog"></i>
+      </md-button>
+    </div>
+  </md-toolbar>
+ <md-dialog-content>
+  <div layout="column">
+    Copy the following link and send it to your friends ! 
+    <md-input-container>
+      <input ng-value="shareUrl"></input>
+    </md-input-container>
+  </div>
+ </md-dialog-content> 
+ <md-dialog-actions> 
+   <md-button class="md-icon-button" ng-click="shareByEmail()" class="md-raised"> 
+      <md-icon class="mdi mdi-email"></md-icon>
+      <md-tooltip>
+        Send by email
+      </md-tooltip>
+   </md-button> 
+ </md-dialog-actions> 
+</md-dialog>

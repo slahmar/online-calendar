@@ -1,0 +1,18 @@
+ul{
+    list-style-type:none
+}
+
+md-dialog-content{
+    padding:20px;
+}
+
+.headline-margin{
+    margin-left: 10px;
+}
+
+.custom-calendar{
+    width:80%;
+    height:80%;
+    margin-left:150px;
+    margin-top:50px;
+}

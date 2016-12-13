@@ -1,0 +1,22 @@
+<md-dialog class="big-dialog" aria-label="Add or modify an event">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{action}} an event</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon class="mdi mdi-close" aria-label="Close dialog"></i>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content layout-padding layout-margin>
+      <div ng-if="isAuth" ng-include="'/client/dialog/modify-event.html'"></div>
+      <div ng-if="!isAuth" ng-include="'/client/dialog/view-event.html'"></div>
+    </md-dialog-content>
+    <md-dialog-actions ng-if="isAuth" layout="row" layout-align="center">
+      <md-button type="button" class="md-raised" ng-click="save(event)">Save</md-button>
+      <md-button type="button" class="md-raised" ng-click="cancel()">Cancel</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
+

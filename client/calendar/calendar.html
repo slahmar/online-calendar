@@ -1,0 +1,86 @@
+<html ng-app="onlineCalendar">
+    <head>
+        <meta charset="utf-8">
+        <title>Online Calendar</title>
+        <link href="/node_modules/mdi/css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="/node_modules/angular-material/angular-material.min.css">
+        <link rel="stylesheet" href="/client/style.css">
+        <link rel='stylesheet' href='/node_modules/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
+        <script type="text/javascript" src="/node_modules/angular/angular.js"></script>
+        <script type="text/javascript" src="/node_modules/angular-animate/angular-animate.js"></script>
+        <script type="text/javascript" src="/node_modules/angular-messages/angular-messages.js"></script>
+        <script type="text/javascript" src="/node_modules/angular-aria/angular-aria.js"></script>
+        <script type="text/javascript" src="/node_modules/angular-sanitize/angular-sanitize.js"></script>
+        <script type="text/javascript" src="/node_modules/angular-route/angular-route.js"></script>
+        <script type="text/javascript" src="/node_modules/angular-material/angular-material.js"></script>
+        <script type="text/javascript" src="/node_modules/angular-material-calendar/angular-material-calendar.js"></script>
+        <script type='text/javascript' src='/node_modules/angular-loading-bar/build/loading-bar.min.js'></script>
+        <script type="text/javascript" src="/client/app.js"></script>
+        <script type="text/javascript" src="/client/calendar/calendar.js"></script>
+        <script type="text/javascript" src="/client/dialog/dialog.js"></script>
+        <script type="text/javascript" src="/client/search/search.js"></script>
+    </head>
+
+    <body>
+      <div ng-controller="CalendarController">
+        <md-toolbar class="md-hue-2">
+          <div class="md-toolbar-tools">
+            <h1 class="md-headline">
+              <span>Online Calendar</span>
+            </h1>
+            <span flex></span>
+            <div ng-controller="SearchController as ctrl">
+              <md-autocomplete
+                ng-disabled="ctrl.isDisabled"
+                md-no-cache="ctrl.noCache"
+                md-selected-item="ctrl.selectedItem"
+                md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+                md-search-text="ctrl.searchText"
+                md-selected-item-change="ctrl.selectedItemChange(item)"
+                md-items="item in ctrl.querySearch(ctrl.searchText)"
+                md-item-text="item.name"
+                md-min-length="0"
+                placeholder="Search for events">
+                  <md-item-template>
+                    <span md-highlight-text="ctrl.searchText">{{item.name}}</span>
+                  </md-item-template>
+                  <md-not-found>
+                    No events matching "{{ctrl.searchText}}" were found.
+                  </md-not-found>
+                </md-autocomplete>
+            </div>
+            <md-button layout-margin class="md-icon-button" aria-label="Add" ng-if="isAuth" ng-click="addEvent($event)">
+              <md-icon class="mdi mdi-plus"></md-icon>
+              <md-tooltip>
+                Add an event
+              </md-tooltip>
+            </md-button>
+            <md-button layout-margin class="md-icon-button" aria-label="Share" ng-click="shareCalendar($event)">
+              <md-icon class="mdi mdi-share-variant"></md-icon>
+              <md-tooltip>
+                Share my calendar
+              </md-tooltip>
+            </md-button> 
+            <md-button layout-margin class="md-raised" ng-if="isAuth" aria-label="Log out" ng-click="logOut($event)">
+              Log out
+            </md-button>
+            <md-button layout-margin class="md-raised" ng-if="!isAuth" aria-label="Log out" ng-href="/">
+              Log in
+            </md-button>           
+          </div>
+        </md-toolbar>
+        <calendar-md flex
+        calendar-direction="direction"
+        on-day-click="dayClick"
+        title-format="'MMMM y'"
+        ng-model='selectedDate'
+        day-format="'d'"
+        day-label-format="'EEE'"
+        day-label-tooltip-format="'EEEE'"
+        day-tooltip-format="'fullDate'"
+        week-starts-on="firstDayOfWeek"
+        day-content="setDayContent" class="custom-calendar"></calendar-md>
+      </div>
+    </body>
+</html>
+

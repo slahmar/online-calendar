@@ -1,0 +1,34 @@
+<md-dialog aria-label="List of events">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{date | date:'fullDate'}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon class="mdi mdi-close" aria-label="Close dialog"></i>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content layout="column">
+      <md-list ng-if="dayEvents.length > 0">
+        <md-list-item layout-margin ng-repeat="event in dayEvents">
+          <div class="md-list-item-text">
+            <div ng-if="!edit" ng-include="'/client/dialog/view-event.html'">
+            </div>
+            <div ng-if="edit" ng-include="'/client/dialog/modify-event.html'"></div>
+            <div>
+              <md-button type="button" ng-show="isAuth && !confirm && !edit" class="md-raised" ng-click="confirm = true">Delete</md-button>
+              <md-button ng-show="confirm" type="button" class="md-accent md-raised md-warn" ng-click="deleteEvent(event)">Confirm</md-button>
+              <md-button type="button" ng-show="isAuth && !edit" class="md-raised" ng-click="edit = true">Update</md-button>
+              <md-button type="button" ng-show="edit" class="md-raised" ng-click="updateEvent(event)">Save</md-button>
+              <md-button type="button" ng-show="edit" class="md-raised" ng-click="edit = false">Cancel</md-button>
+            </div>
+          </div>          
+        </md-list-item>
+        <md-divider/>
+      </md-list>
+      <span ng-if="dayEvents.length == 0">No events today.</span>
+    </md-dialog-content>
+  </form>
+</md-dialog>
+
